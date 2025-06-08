@@ -1,5 +1,6 @@
 import pygame
 
+# initialize pygame and some values 
 pygame.init()
 
 WINDOW_SIZE = (404, 404)
@@ -9,6 +10,7 @@ screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Tic Tac Toe!")
 clock = pygame.time.Clock()
 
+# player 1 Win menu
 def player_1_win():
     running = True
 
@@ -31,6 +33,7 @@ def player_1_win():
         pygame.display.flip()
         clock.tick(FPS)
 
+# player 2 Win menu
 def player_2_win():
     running = True
     
@@ -53,6 +56,7 @@ def player_2_win():
         pygame.display.flip()
         clock.tick(FPS)
 
+# Draw menu
 def draw():
     running = True
     
@@ -75,7 +79,10 @@ def draw():
         pygame.display.flip()
         clock.tick(FPS)
 
+# main game menu
 def game_menu():
+
+    # load some values
     running = True
 
     images = [
@@ -143,16 +150,19 @@ def game_menu():
             
         return 0 if is_draw else None
 
+    # main game loop
     while running:
 
         screen.fill((0, 0, 0))
 
+        # Draw the lines
         for line in lines:
             pygame.draw.rect(screen, (255, 255, 255), line)
 
         m_pos = pygame.mouse.get_pos()
         m_pressed = pygame.mouse.get_pressed()
 
+        # check the squares and mark the squares states with player 1 or 2
         y = 0
         for row in squares:
             x = 0
@@ -171,7 +181,7 @@ def game_menu():
                 x += 1
             y += 1
 
-
+        # Draw the squares according to the board state
         y = 0
         for row in squares:
             x = 0
@@ -183,6 +193,7 @@ def game_menu():
                 x += 1
             y += 1
 
+        # check the game conditions
         if check_win(board) == 1:
             running = False
             player_1_win()
@@ -193,6 +204,7 @@ def game_menu():
             running = False
             draw()
 
+        # take user inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -203,7 +215,10 @@ def game_menu():
         pygame.display.flip()
         clock.tick(FPS)
 
+# main menu
 def main_menu():
+
+    # load some values
     running = True
 
     font0 = pygame.font.Font(None, size=50)
@@ -211,10 +226,12 @@ def main_menu():
     font2 = pygame.font.Font(None, size=25)
     button = pygame.Rect(102, 152, 200, 100)
 
+    # main game loop
     while running:
 
         screen.fill((0, 0, 0))
 
+        # draw the texts
         title_text = font0.render("Tic Tac Toe!", True, (255, 255, 255))
         screen.blit(title_text, (105, 50))
 
@@ -232,6 +249,7 @@ def main_menu():
         #     running = False
         #     game_menu()
 
+        # take user inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
